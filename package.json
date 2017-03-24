@@ -1,7 +1,7 @@
 {
   "name": "codeslim-react-paginate",
   "description": "Easy pagination for react applications",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "./index.js",
   "standalone": "codeslim-react-paginate",
   "license": "MIT",

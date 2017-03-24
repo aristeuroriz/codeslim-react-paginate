@@ -1,4 +1,4 @@
-# React Simple Paginate
+# Codeslim React Paginate
 
 **Easy pagination mixin and component for React.**
 
