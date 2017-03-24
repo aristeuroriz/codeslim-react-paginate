@@ -1,6 +1,6 @@
 'use strict';
 
-var PaginatrMixin = 
+var SimplePaginateMixin =
   {
 
 
@@ -12,15 +12,10 @@ var PaginatrMixin =
 
       paginate: function(data, perPage, _page)
        {
-       
+
            // if we got no data -> return empty array
             if(data.length < 1) return null;
-
-           // define _page
-            var _page = (_page) ? _page : this.state._page;
-            
-            console.log(_page);
-            
+  
            // define the start
             var start = (_page * perPage);
             var end = start + perPage;
@@ -45,6 +40,6 @@ var PaginatrMixin =
 
 
  };
- 
- 
-module.exports = PaginatrMixin; 
+
+
+module.exports = SimplePaginateMixin;

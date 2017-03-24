@@ -1,6 +1,10 @@
-# React Paginatr
+# React Simple Paginate
 
 **Easy pagination mixin and component for React.**
+
+
+#### Notes:
+- This package has been modified and used for testing purposes only.
 
 Will add easy pagination with help of Array.slice function to display paginated lists.
 Includes a react mixin to easily slice the results and a pagination view component (uses a simple list by default - compatible with bootstrap).
@@ -8,10 +12,10 @@ Includes a react mixin to easily slice the results and a pagination view compone
 
 ## Installation:
 
-Install react-paginatr with npm:
+Install react-simple-paginate with npm:
 
 ```console
-$ npm install react-paginatr
+$ npm install react-simple-paginate  --save
 ```
 
 
@@ -19,9 +23,9 @@ $ npm install react-paginatr
 
 require it in files to use and define Mixin and Component:
 ```javascript
-    var Paginatr = require('react-paginatr'),
-        PaginatrMixin = Paginatr.Mixin,
-        PaginatrComponent = Paginatr.Component;
+    var SimplePaginate = require('react-simple-paginate'),
+        SimplePaginateMixin = SimplePaginate.Mixin,
+        SimplePaginateComponent = SimplePaginate.Component;
 ```
 
 
@@ -34,7 +38,7 @@ add the mixin:
 
 ```javascript
     ...
-    mixins: [PaginatrMixin],
+    mixins: [SimplePaginateMixin],
     ...
 ```
 
@@ -48,41 +52,43 @@ use the paginate method:
 that's what it could look like:
 
 ```javascript
-    
+
     module.exports = React.createClass({
-    
+
           ...
-          
-          mixins: [PaginatrMixin],
-   
+
+          mixins: [SimplePaginateMixin],
+
           resultsPerPage: 2,
-          
+
+          _page: 0
+
           ...
-          
+
           render: function() {
-          
+
               // paginate the full set of results in this.props.results
-               var paginatedResults = this.paginate(this.props.results, this.resultsPerPage);
-              
+               var paginatedResults = this.paginate(this.props.results, this.resultsPerPage, this._page);
+
               // map results
                var Results = paginatedResults.map(function(result)
                          {
                              return (
                                 <div key={'key-' + result.id}>{result.name}</div>
                              );
-                         }); 
-                         
+                         });
+
               // display it
                return (
                   <div>
                      {Results}
                   </div>
                );
-                      
+
            },
-           
+
            ...
-     
+
      });
 ```
 
@@ -91,8 +97,8 @@ that's what it could look like:
 ```javascript
    this.paginate(data, perPage, _page)
 ```
-     
-     
+
+
 ###### array `data`
 An array with items to paginate.
 
@@ -110,8 +116,8 @@ An array with items to paginate.
 the number of items per page
 
 
-###### integer `_page` (optional | defaults to: this.state._page)
-current page number. If not set it will use this.state._page. (only needs to be set in special situations)
+###### integer `_page` (required | to start on page 1, set 0)
+current page number. To page 1, set 0. For 2, set 1, and so on.
 
 
 
@@ -122,23 +128,25 @@ displaying the pagination box is quite easy. Just drop the pagination component 
 
 ```javascript
     ...
-    
+
     render: function() {
         ...
-          <PaginatrComponent 
+          <SimplePaginateComponent
                   page={this.state._page}          /* int: current page number - required */
                   pagesTotal={10}                  /* int: number of total pages - required */
                   pageRangeDisplayed={1}           /* int: how much around start and end should be displayed by default (default: 1) */
                   activePageRangeDisplayed={2}     /* int: how much around active page should be displayed by default (default: 2) */
                   prevLabel="«"                    /* string: label for previous entry - false to disable previous button (default: "Previous") */
                   nextLabel="»"                    /* string: label for next entry - false to disable next button (default: "Next") */
-                  breakLabel="...     "            /* string: label for breaks if there are too many pages to display at once - false to disable breaks (default: "...") */
-                  containerClass="pagination"      /* string: label for breaks if there are too many pages to display at once - false to disable breaks (default: "...") */
+                  breakLabel="..."            /* string: label for breaks if there are too many pages to display at once - false to disable breaks (default: "...") */
+                  ulTagClass="pagination"      /* string: class for ul tags */
+                  liTagClass="page-item" /* string: class for li tags */
+                  aTagClass="page-link" /* string: class for a tags */
                   onPageSelect={this.onPageSelect} /* func: the function to change the page number. the mixin already adds a simple onPageSelect method. If you need more overwrite it. */
           />
-        ... 
+        ...
      },
-     
+
      ...
 ```
 
@@ -150,17 +158,17 @@ to make the component work you need at least those three attributes:
 
 ```javascript
     ...
-    
+
     render: function() {
         ...
-          <PaginatrComponent
+          <SimplePaginateComponent
                   page={this.state._page}
                   pagesTotal={10}
                   onPageSelect={this.onPageSelect}
           />
-        ... 
+        ...
      },
-     
+
      ...
 ```
 
@@ -175,14 +183,14 @@ here is a full working example of a paginated component
 
 ```javascript
 var React = require('react');
-var Paginatr = require('react-paginatr');
-var PaginatrMixin = Paginatr.Mixin,
-    PaginatrComponent = Paginatr.Component;
+var SimplePaginate = require('react-simple-paginate');
+var SimplePaginateMixin = SimplePaginate.Mixin,
+    SimplePaginateComponent = SimplePaginate.Component;
 
 var Mycomponent = React.createClass({
 
 
-   mixins: [PaginatrMixin],
+   mixins: [SimplePaginateMixin],
 
    resultsPerPage: 2,
 
@@ -216,7 +224,7 @@ var Mycomponent = React.createClass({
                      <div className="text-center">
                         <h1>Paginated</h1>
                         {Results}
-                        <PaginatrComponent
+                        <SimplePaginateComponent
                                     page={this.state._page}
                                     pagesTotal={pagesTotal}
                                     pageRangeDisplayed={1}
@@ -224,7 +232,8 @@ var Mycomponent = React.createClass({
                                     prevLabel="«"
                                     nextLabel="»"
                                     breakLabel="...     "
-                                    containerClass="pagination"
+                                    ulTagClass="pagination"
+                                    liTagClass="page-item"
                                     onPageSelect={this.onPageSelect}
                             />
                      </div>
@@ -250,28 +259,26 @@ example:
 
 ```javascript
     ...
-    
+
     onPageSelectCustom: function(_page, clickEvent) {
-      
+
        // do here whatever you need to do
         console.log('the page: '+ _page);
-       
+
        // the following is what we do in the onPageSelect method in mixin (surprise: no big magic there)
         this.setState({ _page: _page });
-      
+
     },
-    
+
     render: function() {
         ...
-          <PaginatrComponent 
+          <SimplePaginateComponent
                   page={2}
                   pagesTotal=[10}
                   onPageSelect={this.onPageSelectCustom} // just use your function here
            />
-        ... 
+        ...
      },
-     
+
      ...
 ```
-     
- 

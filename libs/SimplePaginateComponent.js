@@ -3,7 +3,7 @@
 var React = require('react');
 
 
-var Paginatr = React.createClass({displayName: "Paginatr",
+var SimplePaginate = React.createClass({displayName: "SimplePaginate",
 
 
      propTypes: {
@@ -14,7 +14,9 @@ var Paginatr = React.createClass({displayName: "Paginatr",
         prevLabel                   : React.PropTypes.string,
         nextLabel                   : React.PropTypes.string,
         breakLabel                  : React.PropTypes.string,
-        containerClass              : React.PropTypes.string,
+        ulTagClass                  : React.PropTypes.string,
+        liTagClass                  : React.PropTypes.string,
+        aTagClass                   : React.PropTypes.string,
         onPageSelect                : React.PropTypes.func
      },
 
@@ -27,7 +29,9 @@ var Paginatr = React.createClass({displayName: "Paginatr",
           prevLabel            : "«",
           nextLabel            : "»",
           breakLabel           : "...",
-          containerClass       : "pagination"
+          ulTagClass           : "pagination",
+          liTagClass           : "page-item",
+          aTagClass            : "page-link"
         };
      },
 
@@ -124,7 +128,7 @@ var Paginatr = React.createClass({displayName: "Paginatr",
 
          // if we got less than 1 page -> return nothing
           if(this.props.pagesTotal < 2) return null;
-          
+
          // get current page
           var page = this.props.page,
               breakLabel = this.props.breakLabel;
@@ -134,16 +138,16 @@ var Paginatr = React.createClass({displayName: "Paginatr",
           var Pages = this.createPageArr(). map(function(p, i)
           {
 
-              if(p == 'break') return ( React.createElement("li", {key: 'pgn'+ p +'-'+ i}, React.createElement("span", null, breakLabel)) );
+              if(p == 'break') return ( React.createElement("li", {key: 'pgn'+ p +'-'+ i, className: that.props.liTagClass}, React.createElement("a", {className: that.props.aTagClass}, breakLabel)) );
 
               // display page number
                if(page != p)
                {
-                  return React.createElement("li", {key: 'pgn'+ p +'-'+ i}, React.createElement("a", {href: "#", "data-page": p, onClick: that.onPageSelect}, (p + 1)));
+                  return React.createElement("li", {key: 'pgn'+ p +'-'+ i, className: that.props.liTagClass}, React.createElement("a", {className: that.props.aTagClass, href: "#", "data-page": p, onClick: that.onPageSelect}, (p + 1)));
                }
                else
                {
-                  return React.createElement("li", {key: 'pgn'+ p +'-'+ i, className: "active"}, React.createElement("span", null, (p + 1)));
+                  return React.createElement("li", {key: 'pgn'+ p +'-'+ i, className: "active "+that.props.liTagClass}, React.createElement("a", {className: "disabled "+that.props.aTagClass}, (p + 1)));
                }
 
 
@@ -151,17 +155,17 @@ var Paginatr = React.createClass({displayName: "Paginatr",
 
         // render it
          return (
-            React.createElement("ul", {className: this.props.containerClass}, 
+            React.createElement("ul", {className: this.props.ulTagClass},
                  (this.props.prevLabel == false || page == 0) ? null :
-                    React.createElement("li", {key: "pgn-prev"}, React.createElement("a", {href: "#", "data-page": (page - 1), onClick: that.onPageSelect}, this.props.prevLabel)),
-                
+                    React.createElement("li", {key: "pgn-prev", className: this.props.liTagClass}, React.createElement("a", {className: this.props.aTagClass, href: "#", "data-page": (page - 1), onClick: that.onPageSelect}, this.props.prevLabel)),
 
-               Pages, 
+
+               Pages,
 
 
                  (this.props.nextLabel == false || page == this.props.pagesTotal || (page + 1) >= this.props.pagesTotal) ? null :
-                    React.createElement("li", {key: "pgn-next"}, React.createElement("a", {href: "#", "data-page": (page + 1), onClick: that.onPageSelect}, this.props.nextLabel))
-                
+                    React.createElement("li", {key: "pgn-next", className: this.props.liTagClass}, React.createElement("a", {className: this.props.aTagClass, href: "#", "data-page": (page + 1), onClick: that.onPageSelect}, this.props.nextLabel))
+
             )
          );
 
@@ -171,4 +175,4 @@ var Paginatr = React.createClass({displayName: "Paginatr",
 });
 
 
-module.exports = Paginatr;
+module.exports = SimplePaginate;
