@@ -1,18 +1,18 @@
 {
-  "name": "react-simple-paginate",
+  "name": "codeslim-react-paginate",
   "description": "Easy pagination for react applications",
   "version": "0.0.1",
   "main": "./index.js",
-  "standalone": "react-simple-paginate",
+  "standalone": "codeslim-react-paginate",
   "license": "MIT",
   "author": {
     "name": "Aristeu Roriz"
   },
   "repository": {
-    "url": "https://github.com/aristeuroriz/react-simple-paginate"
+    "url": "https://github.com/aristeuroriz/codeslim-react-paginate"
   },
   "bugs": {
-    "url": "https://github.com/aristeuroriz/react-simple-paginate/issues"
+    "url": "https://github.com/aristeuroriz/codeslim-react-paginate/issues"
   },
   "dependencies": {
     "react": "*"
@@ -23,9 +23,8 @@
     "paginate",
     "pagination",
     "pages",
-    "marty",
-    "martyjs"
+    "codeslim"
   ],
   "readmeFilename": "README.md",
-  "homepage": "https://github.com/aristeuroriz/react-simple-paginate"
+  "homepage": "https://github.com/aristeuroriz/codeslim-react-paginate"
 }

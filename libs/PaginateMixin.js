@@ -1,6 +1,6 @@
 'use strict';
 
-var SimplePaginateMixin =
+var PaginateMixin =
   {
 
 
@@ -42,4 +42,4 @@ var SimplePaginateMixin =
  };
 
 
-module.exports = SimplePaginateMixin;
+module.exports = PaginateMixin;

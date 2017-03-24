@@ -1,9 +1,9 @@
 'use strict';
 
-var SimplePaginateComponent = require('./libs/SimplePaginateComponent');
-var SimplePaginateMixin = require('./libs/SimplePaginateMixin');
+var PaginateComponent = require('./libs/PaginateComponent');
+var PaginateMixin = require('./libs/PaginateMixin');
 
 module.exports = {
-  Component: SimplePaginateComponent,
-  Mixin: SimplePaginateMixin
+  Component: PaginateComponent,
+  Mixin: PaginateMixin
 };

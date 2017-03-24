@@ -3,7 +3,7 @@
 var React = require('react');
 
 
-var SimplePaginate = React.createClass({displayName: "SimplePaginate",
+var Paginate = React.createClass({displayName: "Paginate",
 
 
      propTypes: {
@@ -175,4 +175,4 @@ var SimplePaginate = React.createClass({displayName: "SimplePaginate",
 });
 
 
-module.exports = SimplePaginate;
+module.exports = Paginate;

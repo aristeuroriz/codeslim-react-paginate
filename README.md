@@ -12,10 +12,10 @@ Includes a react mixin to easily slice the results and a pagination view compone
 
 ## Installation:
 
-Install react-simple-paginate with npm:
+Install codeslim-react-paginate with npm:
 
 ```console
-$ npm install react-simple-paginate  --save
+$ npm install codeslim-react-paginate  --save
 ```
 
 
@@ -23,9 +23,9 @@ $ npm install react-simple-paginate  --save
 
 require it in files to use and define Mixin and Component:
 ```javascript
-    var SimplePaginate = require('react-simple-paginate'),
-        SimplePaginateMixin = SimplePaginate.Mixin,
-        SimplePaginateComponent = SimplePaginate.Component;
+    var Paginate = require('codeslim-react-paginate'),
+        PaginateMixin = Paginate.Mixin,
+        PaginateComponent = Paginate.Component;
 ```
 
 
@@ -38,7 +38,7 @@ add the mixin:
 
 ```javascript
     ...
-    mixins: [SimplePaginateMixin],
+    mixins: [PaginateMixin],
     ...
 ```
 
@@ -57,7 +57,7 @@ that's what it could look like:
 
           ...
 
-          mixins: [SimplePaginateMixin],
+          mixins: [PaginateMixin],
 
           resultsPerPage: 2,
 
@@ -131,7 +131,7 @@ displaying the pagination box is quite easy. Just drop the pagination component 
 
     render: function() {
         ...
-          <SimplePaginateComponent
+          <PaginateComponent
                   page={this.state._page}          /* int: current page number - required */
                   pagesTotal={10}                  /* int: number of total pages - required */
                   pageRangeDisplayed={1}           /* int: how much around start and end should be displayed by default (default: 1) */
@@ -161,7 +161,7 @@ to make the component work you need at least those three attributes:
 
     render: function() {
         ...
-          <SimplePaginateComponent
+          <PaginateComponent
                   page={this.state._page}
                   pagesTotal={10}
                   onPageSelect={this.onPageSelect}
@@ -183,14 +183,14 @@ here is a full working example of a paginated component
 
 ```javascript
 var React = require('react');
-var SimplePaginate = require('react-simple-paginate');
-var SimplePaginateMixin = SimplePaginate.Mixin,
-    SimplePaginateComponent = SimplePaginate.Component;
+var Paginate = require('codeslim-react-paginate');
+var PaginateMixin = Paginate.Mixin,
+    PaginateComponent = Paginate.Component;
 
 var Mycomponent = React.createClass({
 
 
-   mixins: [SimplePaginateMixin],
+   mixins: [PaginateMixin],
 
    resultsPerPage: 2,
 
@@ -224,7 +224,7 @@ var Mycomponent = React.createClass({
                      <div className="text-center">
                         <h1>Paginated</h1>
                         {Results}
-                        <SimplePaginateComponent
+                        <PaginateComponent
                                     page={this.state._page}
                                     pagesTotal={pagesTotal}
                                     pageRangeDisplayed={1}
@@ -272,7 +272,7 @@ example:
 
     render: function() {
         ...
-          <SimplePaginateComponent
+          <PaginateComponent
                   page={2}
                   pagesTotal=[10}
                   onPageSelect={this.onPageSelectCustom} // just use your function here
